@@ -50,4 +50,13 @@ class CmsTest < Minitest::Test
 
     refute_includes last_response.body, "nosuchdoc.ext does not exist."
   end
+
+  def test_view_markdown_doc
+    get '/about.md'
+
+    assert_equal 200, last_response.status
+    assert_equal "text/html;charset=utf-8", last_response["Content-Type"]
+    assert_includes last_response.body, "<h1>This is a header</h1>"
+
+  end
 end
