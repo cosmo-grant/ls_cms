@@ -15,6 +15,16 @@ def render_markdown(text)
   md.render(text)
 end
 
+def load_file_content(file_path)
+  case File.extname(file_path)
+  when ".md"
+    render_markdown(File.read(file_path))
+  else
+    headers['Content-Type'] = 'text/plain'
+    File.read(file_path)
+  end
+end
+
 get '/' do
   @filenames = Dir.glob('*', base: root + '/data')
   erb :index
@@ -24,14 +34,8 @@ get '/:filename' do
   @filename = params[:filename]
   file_path = root + '/data/' + @filename
   if File.file?(file_path)
-    if File.extname(file_path) == '.md'
-      render_markdown(File.read(file_path))
-    else
-      headers['Content-Type'] = 'text/plain'
-      File.read(file_path)
-    end
+    load_file_content(file_path)
   else
-    # file does not exist
     session[:error] = "#{@filename} does not exist."
     redirect '/'
   end
