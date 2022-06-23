@@ -1,0 +1,3 @@
+first line of history
+
+third line of history; blank line above
