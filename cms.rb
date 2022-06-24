@@ -24,7 +24,7 @@ end
 def load_file_content(file_path)
   case File.extname(file_path)
   when ".md"
-    render_markdown(File.read(file_path))
+    erb render_markdown(File.read(file_path))
   else
     headers['Content-Type'] = 'text/plain'
     File.read(file_path)
@@ -32,8 +32,7 @@ def load_file_content(file_path)
 end
 
 get '/' do
-  pattern = File.join(data_path, '*')
-  @filenames = Dir.glob(pattern)
+  @filenames = Dir.glob('*', base: data_path)
   erb :index
 end
 

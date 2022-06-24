@@ -72,7 +72,7 @@ class CmsTest < Minitest::Test
 
     assert_equal 200, last_response.status
     assert_equal "text/html;charset=utf-8", last_response["Content-Type"]
-    assert_equal last_response.body, render_markdown(content)
+    assert_includes last_response.body, render_markdown(content)
   end
 
   def test_no_such_doc

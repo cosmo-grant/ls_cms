@@ -1,11 +1,3 @@
-<% if session[:success] %>
-  <%= session.delete(:success) %>
-<% end %>
-
-<% if session[:error] %>
-  <%= session.delete(:error) %>
-<% end %>
-
 <ul>
   <% @filenames.each do |filename| %>
     <li>
