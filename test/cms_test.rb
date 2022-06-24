@@ -57,6 +57,29 @@ class CmsTest < Minitest::Test
     assert_equal 200, last_response.status
     assert_equal "text/html;charset=utf-8", last_response["Content-Type"]
     assert_includes last_response.body, "<h1>This is a header</h1>"
+  end
 
+  def test_edit_page
+    get '/changes.txt/edit'
+
+    assert_equal 200, last_response.status
+    assert_includes last_response.body, "Edit contents of changes.txt:"
+    assert_includes last_response.body, '<button type="submit"'
+  end
+
+  def test_updating_doc
+    post '/changes.txt', content: "new content"
+
+    assert_equal 302, last_response.status
+
+    get last_response['Location']
+
+    assert_equal 200, last_response.status
+    assert_includes last_response.body, "changes.txt has been updated."
+
+    get '/changes.txt'
+
+    assert_equal 200, last_response.status
+    assert_includes "new content", last_response.body
   end
 end
