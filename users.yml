@@ -1,5 +1,5 @@
 {
-  bill: billspassword,
-  sonia: soniaspassword,
-  cosmo: mypassword
+  bill: $2a$12$LC.wi2.Rh1HaVDRqOFPoROHn8R8MWOJzBDhW0d/Nwy9XvzJQOtEVK,
+  sonia: $2a$12$OkBdY.Bg0hsR5F17Oz/VP.f9fLuI698ow5yT9mL8JC1o/v6dCYfsa,
+  cosmo: $2a$12$V/aZg/MpDYhQHVX1oGSbeujAdh9cKSJY74u4WLHCVfEL9xIKslbTS
 }

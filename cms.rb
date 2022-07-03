@@ -3,6 +3,7 @@ require 'sinatra/reloader'
 require 'tilt/erubis'
 require 'redcarpet'
 require 'psych'
+require 'bcrypt'
 
 configure do
   enable :sessions
@@ -39,7 +40,7 @@ def valid_credentials?(username, password)
     credentials_path = File.expand_path("../users.yml", __FILE__)
   end
   users = Psych.load_file(credentials_path)
-  users[username] == password
+  users[username] && BCrypt::Password.new(users[username]) == password
 end
 
 def signed_in?
